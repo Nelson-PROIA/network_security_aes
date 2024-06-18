@@ -1054,4 +1054,27 @@ class State {
         return stringBuilder.toString();
     }
 
+    // Convertit l'état entier en une chaîne hexadécimale.
+    public String toStringH() {
+        StringBuilder hexString = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            for (int j = 0; j < bytes[i].length; j++) {
+                hexString.append(bytes[i][j].toStringH()).append(" ");
+            }
+            hexString.append("\n"); // Nouvelle ligne pour chaque rangée pour une meilleure lisibilité
+        }
+        return hexString.toString();
+    }
+
+    // Méthode pour obtenir une représentation sous forme de chaîne d'une ligne spécifique
+    public String toStringRow(int row) {
+        if (row < 0 || row >= bytes.length) {
+            throw new IllegalArgumentException("Row index out of bounds");
+        }
+        StringBuilder rowString = new StringBuilder();
+        for (int j = 0; j < bytes[row].length; j++) {
+            rowString.append(bytes[row][j].toString()).append(" ");  // Utiliser toStringH() pour hexadécimal si nécessaire
+        }
+        return rowString.toString().trim();  // Retire l'espace supplémentaire à la fin
+    }
 }
